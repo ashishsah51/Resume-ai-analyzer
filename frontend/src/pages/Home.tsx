@@ -8,6 +8,7 @@ import axios from "axios";
 
 const Home = () => {
   const navigate = useNavigate();
+  const instanceUrl = import.meta.env.INSTANCE_URL;
 
   const [stats, setStats] = useState([]);
 
@@ -28,7 +29,7 @@ const Home = () => {
 
     async function incrementVisit() {
       try {
-        await axios.post("http://localhost:5000/api/stats/increment/visit");
+        await axios.post(`${instanceUrl}/api/stats/increment/visit`);
       } catch (err) {
         console.error(err);
       }

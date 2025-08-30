@@ -4,7 +4,7 @@ const router = express.Router();
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
-require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
+require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
 const { enhanceResumePrompt } = require('../utils/promptBuilder');
 
 
@@ -39,7 +39,7 @@ router.post("/", upload.single("resumeFile"), async (req, res) => {
       structuredData: enhancedResume.data,
     });
   } catch (error) {
-    fs.unlinkSync(filePath);
+    // fs.unlinkSync(filePath);
     console.error(error);
     res.status(500).json({ error: error.message });
   }

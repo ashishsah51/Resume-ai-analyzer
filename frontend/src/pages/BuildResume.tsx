@@ -74,6 +74,7 @@ interface CustomSection {
 }
 
 const BuildResume = () => {
+  const instanceUrl = import.meta.env.INSTANCE_URL;
   const [activeTab, setActiveTab] = useState("personal");
   const { toast } = useToast();
 
@@ -185,7 +186,7 @@ const BuildResume = () => {
     });
 
     try {
-      await axios.post("http://localhost:5000/api/stats/increment/build");
+      await axios.post(`${instanceUrl}/api/stats/increment/build`);
     } catch (err) {
       console.error(err);
     }

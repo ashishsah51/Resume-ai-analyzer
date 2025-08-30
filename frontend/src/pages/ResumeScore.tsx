@@ -51,6 +51,7 @@ const ResumeScore = () => {
   };
 
   const handleGenerateScore = async () => {
+    const instanceUrl = import.meta.env.INSTANCE_URL;
     if (!resumeFile) {
       toast({
         title: "Missing resume",
@@ -72,7 +73,7 @@ const ResumeScore = () => {
 
     // Make API Call
     try {
-      const response = await axios.post("http://localhost:5000/api/analyze", formData);
+      const response = await axios.post(`${instanceUrl}/api/analyze`, formData);
       setAnalysis(response.data);
     } catch (error) {
       console.error("Server Error:", error);
@@ -95,6 +96,7 @@ const ResumeScore = () => {
   };
 
   const handleEnhance = async () => {
+    const instanceUrl = import.meta.env.INSTANCE_URL;
     if (!user) {
       // Save current path so we can return after login
       setRedirectPath(location.pathname);
@@ -113,7 +115,7 @@ const ResumeScore = () => {
 
     // Make API Call
     try {
-      const response = await axios.post("http://localhost:5000/api/enhance", formData);
+      const response = await axios.post(`${instanceUrl}/api/enhance`, formData);
       const resumeHTML = generateResume({
         personalInfo: response.data.structuredData.personalInfo,
         experiences: response.data.structuredData.experiences,

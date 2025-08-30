@@ -35,7 +35,7 @@ router.post('/', upload.single('resumeFile'), async (req, res) => {
     res.json(result);
 
   } catch (err) {
-    fs.unlinkSync(filePath);
+    // if(!filePath) fs.unlinkSync(filePath);
     console.error('Error analyzing resume with OpenAI:', err);
     res.status(500).json({ error: 'Internal Server Error' });
   }

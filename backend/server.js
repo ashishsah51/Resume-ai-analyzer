@@ -1,4 +1,3 @@
-// Import required modules
 const express = require('express');                 // Express framework for creating the server
 const bodyParser = require('body-parser');         // Middleware to parse request bodies
 const cors = require('cors');                      // Middleware to allow cross-origin requests
@@ -7,7 +6,7 @@ const fs = require('fs');                          // Built-in module to interac
 const analyzeRoute = require('./routes/analyze');  // Importing the analyze route module
 const enhanceRoute = require('./routes/enhanceResume');
 const statsRoutes = require('./routes/stats');      // Importing the stats route module
-require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
+require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
 
 // Initialize the Express application
 const app = express();                             // Create an Express application instance
@@ -30,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded data fr
 app.use('/api/analyze', analyzeRoute);             // Mount the analyze route on '/api/analyze'
 app.use('/api/enhance', enhanceRoute);
 app.use("/api/stats", statsRoutes);
-
+app.use("/", express.static(path.join(__dirname, 'public'))); // Serve static files from "public" folder
 
 
 // Start the server

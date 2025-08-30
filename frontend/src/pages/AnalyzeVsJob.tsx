@@ -22,6 +22,7 @@ interface ATSResult {
 }
 
 const AnalyzeVsJob = () => {
+  const instanceUrl = process.env.INSTANCE_URL;
   const [jobDescription, setJobDescription] = useState("");
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -71,9 +72,9 @@ const AnalyzeVsJob = () => {
 
     // Make API Call
     try {
-      const response = await axios.post("http://localhost:5000/api/analyze", formData);
+      const response = await axios.post(`${instanceUrl}/api/analyze`, formData);
       setResult(response.data);
-      await axios.post("http://localhost:5000/api/stats/increment/analyze");
+      await axios.post(`${instanceUrl}/api/stats/increment/analyze`);
     } catch (error) {
       console.error("Server Error:", error);
       alert("❌ Failed to analyze resume. Please try again.");
@@ -114,7 +115,7 @@ const AnalyzeVsJob = () => {
 
     // Make API Call
     try {
-      const response = await axios.post("http://localhost:5000/api/enhance", formData);
+      const response = await axios.post(`${instanceUrl}/api/enhance`, formData);
       const resumeHTML = generateResume({
         personalInfo: response.data.structuredData.personalInfo,
         experiences: response.data.structuredData.experiences,
@@ -131,7 +132,7 @@ const AnalyzeVsJob = () => {
       }
       win.document.write(resumeHTML);
       win.document.close();
-      await axios.post("http://localhost:5000/api/stats/increment/enhance");
+      await axios.post(`${instanceUrl}/api/stats/increment/enhance`);
     } catch (error) {
       console.log(error.message);
       console.error("Server Error:", error);

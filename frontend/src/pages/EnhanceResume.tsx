@@ -9,6 +9,7 @@ import { renderResumeText, generateResume } from "../components/generate"
 import axios from "axios";
 
 const EnhanceResume = () => {
+  const instanceUrl = import.meta.env.INSTANCE_URL;
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [resumeText, setResumeText] = useState("");
   const [isEnhancing, setIsEnhancing] = useState(false);
@@ -60,12 +61,12 @@ const EnhanceResume = () => {
 
     // Make API Call
     try {
-      const response = await axios.post("http://localhost:5000/api/enhance", formData);
+      const response = await axios.post(`${instanceUrl}/api/enhance`, formData);
       const resumeTxt = renderResumeText(response.data.structuredData);
       setEnhancedResume(response.data);
       setEnhancedText(resumeTxt);
       setSuggestions(response.data.structuredData.mockSuggestion);
-      await axios.post("http://localhost:5000/api/stats/increment/analyze");
+      await axios.post(`${instanceUrl}/api/stats/increment/analyze`);
     } catch (error) {
       console.error("Server Error:", error);
       alert("❌ Failed to analyze resume. Please try again.");
@@ -87,7 +88,7 @@ const EnhanceResume = () => {
       customSections: enhancedResume.structuredData.customSections
     });
     try {
-      await axios.post("http://localhost:5000/api/stats/increment/enhance");
+      await axios.post(`${instanceUrl}/api/stats/increment/enhance`);
     } catch (err) {
       console.error(err);
     }

@@ -57,16 +57,18 @@ const Navigation = () => {
           <div className="flex items-center space-x-4">
             {
               user ? (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={logout}
-                  className="flex items-center space-x-2"
-                >
+                <>
                   <span className="font-medium">Hi, {user.name || user.email}</span>
-                  <LogOut className="w-4 h-4" />
-                  <span className="hidden sm:inline">Sign Out</span>
-                </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={logout}
+                    className="flex items-center space-x-2"
+                  >
+                    <span className="hidden sm:inline">Sign Out</span>
+                    <LogOut className="w-4 h-4" />
+                  </Button>
+                </>
               ) : (
                 <Button
                   variant="ghost"
