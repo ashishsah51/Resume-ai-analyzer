@@ -7,7 +7,6 @@ const Navigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout } = useAuth();
-  console.log('user:', user);
 
   const navItems = [
     { path: "/analyze", label: "Analyze vs Job", icon: BarChart3 },

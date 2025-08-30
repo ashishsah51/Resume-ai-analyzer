@@ -19,7 +19,7 @@ const EnhanceResume = () => {
 
   useEffect(() => {
     if (enhancedText !== null) {
-      console.log('enhancedResume updated:', enhancedText);
+      console.log('enhancedResume updated');
     }
   }, [enhancedText]);
 

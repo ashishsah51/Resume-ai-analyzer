@@ -76,8 +76,6 @@ export const generateResume = ({
     skillSections = [],
     customSections = []
   }) => {
-    console.log('personalInfo', personalInfo)
-    console.log('customSections', customSections)
     return `
     <!DOCTYPE html>
     <html>
@@ -112,8 +110,8 @@ export const generateResume = ({
       <span>${info.email || 'your.email@example.com'}</span>
       <span>${info.phone || '(555) 123-4567'}</span>
       <span>${info.location || 'Your City, State'}</span>
-      ${info.linkedin ? `<a href={info.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>`: ''}
-      ${info.github ? `<a href={info.github} target="_blank" rel="noopener noreferrer">GitHub</a>` : ''}
+      ${info.linkedin ? `<a href="${info.linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn</a>` : ''}
+      ${info.github ? `<a href="${info.github}" target="_blank" rel="noopener noreferrer">GitHub</a>` : ''}
     </div>
   </header>
 `;

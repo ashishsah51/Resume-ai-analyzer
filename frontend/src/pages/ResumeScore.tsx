@@ -131,7 +131,6 @@ const ResumeScore = () => {
       win.document.write(resumeHTML);
       win.document.close();
     } catch (error) {
-      console.log(error.message);
       console.error("Server Error:", error);
       alert("❌ Failed to analyze resume. Please try again.");
     } finally {
