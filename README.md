@@ -101,6 +101,8 @@ NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
 
 ## System Architecture / Workflow
 
+![System Architecture](./frontend/public/Resume%20AI%20Analyzer%20Solution%20digram.png)
+
 ```mermaid
 flowchart TD
     A[Frontend<br/>React TSX + Vite] -->|1. Upload Resume /<br/>Enter Text /<br/>Provide Job Description| B[Backend<br/>Node.js + Express]
