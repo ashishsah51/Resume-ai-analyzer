@@ -9,7 +9,7 @@ import { renderResumeText, generateResume } from "../components/generate"
 import axios from "axios";
 
 const EnhanceResume = () => {
-  const instanceUrl = import.meta.env.INSTANCE_URL;
+  const instanceUrl = process.env.INSTANCE_URL;
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [resumeText, setResumeText] = useState("");
   const [isEnhancing, setIsEnhancing] = useState(false);
@@ -20,7 +20,7 @@ const EnhanceResume = () => {
 
   useEffect(() => {
     if (enhancedText !== null) {
-      console.log('enhancedResume updated');
+      console.log('enhancedResume updated', enhancedText);
     }
   }, [enhancedText]);
 
