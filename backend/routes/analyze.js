@@ -10,7 +10,6 @@ const upload = multer({ dest: 'uploads/' });
 
 // Route: POST /api/analyze
 router.post('/', upload.single('resumeFile'), async (req, res) => {
-  let filePath;
   try {
     const jdText = req.body.jdText || ''
     const resumeVsJob = req.body.resumeVsJJob === 'true';
@@ -35,7 +34,6 @@ router.post('/', upload.single('resumeFile'), async (req, res) => {
     res.json(result);
 
   } catch (err) {
-    // if(!filePath) fs.unlinkSync(filePath);
     console.error('Error analyzing resume with OpenAI:', err);
     res.status(500).json({ error: 'Internal Server Error' });
   }

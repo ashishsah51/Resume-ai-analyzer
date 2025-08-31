@@ -86,46 +86,45 @@ async function analyzeResumeWithOpenAI(buffer, filename, jobDescription, resumeV
   }
 }
 
-async function enhanceResumeWithOpenAI(resumeText, sugText) {
-    const prompt = enhanceResumePrompt(resumeText, sugText);
-  
-    // Get the Gemini model. We'll use 'gemini-1.5-flash' for speed and efficiency.
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash-latest",
-      // This is the key change: Enforcing JSON output!
-      generationConfig: {
-        responseMimeType: "application/json",
-        temperature: 0.2,
-      },
-      // Optional: Configure safety settings to be less restrictive.
-      safetySettings: [
-          {
-            category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-            threshold: HarmBlockThreshold.BLOCK_NONE,
-          },
-          {
-            category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-            threshold: HarmBlockThreshold.BLOCK_NONE,
-          },
-          {
-              category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-              threshold: HarmBlockThreshold.BLOCK_NONE,
-          },
-          {
-              category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-              threshold: HarmBlockThreshold.BLOCK_NONE,
-          }
-        ],
-    });
-  
-    const result = await model.generateContent(prompt);
-    const structuredData =  JSON.parse((await result.response).text());
-
+  async function enhanceResumeWithOpenAI(resumeText, sugText) {
     try {
-        // The responseText is now guaranteed to be a valid JSON string.
-        return { data: structuredData };
+      const prompt = enhanceResumePrompt(resumeText, sugText);
+    
+      // Get the Gemini model. We'll use 'gemini-1.5-flash' for speed and efficiency.
+      const model = genAI.getGenerativeModel({
+        model: "gemini-1.5-flash-latest",
+        // This is the key change: Enforcing JSON output!
+        generationConfig: {
+          responseMimeType: "application/json",
+          temperature: 0.2,
+        },
+        // Optional: Configure safety settings to be less restrictive.
+        safetySettings: [
+            {
+              category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+              threshold: HarmBlockThreshold.BLOCK_NONE,
+            },
+            {
+              category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+              threshold: HarmBlockThreshold.BLOCK_NONE,
+            },
+            {
+                category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+                threshold: HarmBlockThreshold.BLOCK_NONE,
+            },
+            {
+                category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+                threshold: HarmBlockThreshold.BLOCK_NONE,
+            }
+          ],
+      });
+    
+      const result = await model.generateContent(prompt);
+      const structuredData =  JSON.parse((await result.response).text());
+      // The responseText is now guaranteed to be a valid JSON string.
+      return { data: structuredData };
     } catch (e) {
-      console.error('Failed to parse Gemini response:', responseText);
+      console.error('Failed to parse Gemini response:', e);
       throw new Error('Gemini response was not valid JSON, despite the settings.');
     }
   }
