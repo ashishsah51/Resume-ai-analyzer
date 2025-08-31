@@ -6,7 +6,8 @@ const fs = require('fs');
 const { analyzeResumeWithOpenAI } = require('../services/openaiAnalyzer'); // custom OpenAI logic
 
 // Multer setup
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: '/tmp/uploads/' });
+
 
 // Route: POST /api/analyze
 router.post('/', upload.single('resumeFile'), async (req, res) => {

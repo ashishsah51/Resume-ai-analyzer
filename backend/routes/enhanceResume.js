@@ -16,7 +16,7 @@ const {
 const pdf = require("pdf-parse");
 
 const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
-const upload = multer({ dest: "uploads/" });
+const upload = multer({ dest: "/tmp/uploads/" });
 
 router.post("/", upload.single("resumeFile"), async (req, res) => {
   try {
