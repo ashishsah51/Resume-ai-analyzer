@@ -29,7 +29,12 @@ app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded data fr
 app.use('/api/analyze', analyzeRoute);             // Mount the analyze route on '/api/analyze'
 app.use('/api/enhance', enhanceRoute);
 app.use("/api/stats", statsRoutes);
-app.get("/", express.static(path.join(__dirname, 'public'))); // Serve static files from "public" folder
+app.get('/',(req,res)=>{
+    res.send({
+        activeStatus:true,
+        error:false,
+    })
+}) // Serve static files from "public" folder
 
 
 // Start the server
