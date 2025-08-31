@@ -62,6 +62,7 @@ const EnhanceResume = () => {
     // Make API Call
     try {
       const response = await axios.post(`${instanceUrl}/api/enhance`, formData);
+      console.log('Enhancement response:', response);
       const resumeTxt = renderResumeText(response.data.structuredData);
       setEnhancedResume(response.data);
       setEnhancedText(resumeTxt);
