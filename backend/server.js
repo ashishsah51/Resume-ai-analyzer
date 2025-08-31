@@ -2,7 +2,9 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:8080","https://resume-ai-analyzer-omega.vercel.app/"]
+}));
 app.use(express.json());
 
 // Example routes
