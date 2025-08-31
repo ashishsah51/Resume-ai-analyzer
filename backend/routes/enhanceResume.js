@@ -20,24 +20,31 @@ const upload = multer({ dest: "/tmp/uploads/" });
 
 router.post("/", upload.single("resumeFile"), async (req, res) => {
   try {
-    let resumeText = req.body.text || "";
-    let suggestionText = req.body.jdText || ""
-    let filePath;
-
-    if (req.file) {
-      filePath = path.join(__dirname, "../uploads", req.file.filename);
-      resumeText = await extractTextFromPdf(filePath);
-      fs.unlinkSync(filePath);
-    }
-
-    if (!resumeText.trim()) {
-      return res.status(400).json({ error: "No resume content provided" });
-    }
-
-    const enhancedResume = await extractResumeData(resumeText, suggestionText);
+    const { resumeText, jdText } = req.body;
+    // Placeholder logic
     res.json({
-      structuredData: enhancedResume.data,
+      message: "Enhance API working ✅",
+      resumeText: resumeText || "",
+      jdText: jdText || ""
     });
+    // let resumeText = req.body.text || "";
+    // let suggestionText = req.body.jdText || ""
+    // let filePath;
+
+    // if (req.file) {
+    //   filePath = path.join(__dirname, "../uploads", req.file.filename);
+    //   resumeText = await extractTextFromPdf(filePath);
+    //   fs.unlinkSync(filePath);
+    // }
+
+    // if (!resumeText.trim()) {
+    //   return res.status(400).json({ error: "No resume content provided" });
+    // }
+
+    // const enhancedResume = await extractResumeData(resumeText, suggestionText);
+    // res.json({
+    //   structuredData: enhancedResume.data,
+    // });
   } catch (error) {
     // fs.unlinkSync(filePath);
     console.error(error);

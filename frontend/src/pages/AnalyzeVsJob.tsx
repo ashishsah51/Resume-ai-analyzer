@@ -116,7 +116,7 @@ const AnalyzeVsJob = () => {
     // Make API Call
     try {
       const response = await axios.post(`${instanceUrl}/api/enhance`, formData);
-      console.log('Enhancement response:', response.data);
+      console.log('Enhancement response:', response);
       const resumeHTML = generateResume({
         personalInfo: response.data.structuredData.personalInfo,
         experiences: response.data.structuredData.experiences,
