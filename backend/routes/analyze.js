@@ -12,6 +12,7 @@ const upload = multer({ dest: '/tmp/uploads/' });
 // Route: POST /api/analyze
 router.post('/', upload.single('resumeFile'), async (req, res) => {
   try {
+    console.log("Request received at /api/analyze");
     const jdText = req.body.jdText || ''
     const resumeVsJob = req.body.resumeVsJJob === 'true';
 
