@@ -51,7 +51,7 @@ const ResumeScore = () => {
   };
 
   const handleGenerateScore = async () => {
-    const instanceUrl = import.meta.env.INSTANCE_URL;
+    const instanceUrl = process.env.INSTANCE_URL;
     if (!resumeFile) {
       toast({
         title: "Missing resume",
@@ -96,7 +96,7 @@ const ResumeScore = () => {
   };
 
   const handleEnhance = async () => {
-    const instanceUrl = import.meta.env.INSTANCE_URL;
+    const instanceUrl = process.env.INSTANCE_URL;
     if (!user) {
       // Save current path so we can return after login
       setRedirectPath(location.pathname);

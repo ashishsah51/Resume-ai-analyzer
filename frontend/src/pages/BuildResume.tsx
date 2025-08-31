@@ -74,7 +74,7 @@ interface CustomSection {
 }
 
 const BuildResume = () => {
-  const instanceUrl = import.meta.env.INSTANCE_URL;
+  const instanceUrl = process.env.INSTANCE_URL;
   const [activeTab, setActiveTab] = useState("personal");
   const { toast } = useToast();
 

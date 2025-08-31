@@ -8,7 +8,8 @@ import axios from "axios";
 
 const Home = () => {
   const navigate = useNavigate();
-  const instanceUrl = import.meta.env.INSTANCE_URL;
+  const instanceUrl = process.env.INSTANCE_URL;
+
 
   const [stats, setStats] = useState([]);
 
@@ -70,7 +71,7 @@ const Home = () => {
   ];
 
   const getCounters = async () => {
-    const res = await fetch("http://localhost:5000/api/stats");
+    const res = await fetch(`${instanceUrl}/api/stats`);
     const data = await res.json();
     if (!res.ok) throw new Error("Failed to fetch counters");
     return data;
