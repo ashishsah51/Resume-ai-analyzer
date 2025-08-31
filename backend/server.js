@@ -36,8 +36,4 @@ app.get('/',(req,res)=>{
     })
 }) // Serve static files from "public" folder
 
-
-// Start the server
-app.listen(PORT, () => {                           // Start listening on the defined port
-  console.log(`✅ Backend server running at http://localhost:${PORT}`); // Log success message
-});
+module.exports = app;
